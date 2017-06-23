@@ -4,17 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-
+    "build": "ng build",
+    "build-prod": "ng build -prod",
     "start-front": "ng serve",
     "start-back": "SET STANDALONE_BACKEND=true && cd src/server && nodemon server.js",
-
-    "build-front": "ng build",
-    "build-all": "ng build && cp src/server\/* dist",
-    "build-all-prod": "ng build -prod && cp src/serve\/* dist",
-
-    "build-all-and-start" : "npm run build-all && cd dist && node server.js",
-    "build-all-and-start-prod": "npm run build-all-prod && cd dist && node server.js",
-
+    "start-all": "cd src/server && node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -31,7 +25,10 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
+    "ng-socket-io": "^0.1.10",
     "rxjs": "^5.1.0",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
