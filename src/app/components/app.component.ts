@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import IUsbPacketsService from '../services/usb-packets.service.interface';
 
 @Component({
@@ -9,7 +9,7 @@ import IUsbPacketsService from '../services/usb-packets.service.interface';
 export class AppComponent implements OnInit {
 
   title = 'umm works!';
-  receivedMessages: string[] = [];
+  receivedPackets: string[] = [];
 
   constructor(private usbPacketsService: IUsbPacketsService) {
   };
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.usbPacketsService.greetServer();
     this.usbPacketsService.packetsObs.subscribe(
-      (message) => this.receivedMessages.push(message)
+      (packet) => this.receivedPackets.push(packet)
     );
   }
 

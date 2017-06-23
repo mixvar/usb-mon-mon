@@ -12,16 +12,22 @@ export class UsbPacketsService implements IUsbPacketsService {
   packetsObs: Subject<string> = new Subject();
 
   constructor(private socket: Socket) {
-    this.receiveMessages();
+    this.receiveGreetings();
+    this.receivePackets();
   }
 
   public greetServer(): void {
-    this.socket.emit('message', 'hello server!');
+    this.socket.emit('greeting', 'hello server!');
   }
 
-  private receiveMessages() {
-    this.socket.on('message', (message) =>
-      this.packetsObs.next(message));
+  private receiveGreetings() {
+    this.socket.on('greeting', (message) =>
+      console.log(`received greeting from server: '${message}'`));
+  }
+
+  private receivePackets() {
+    this.socket.on('packet', (packet) =>
+      this.packetsObs.next(packet));
   }
 
 }

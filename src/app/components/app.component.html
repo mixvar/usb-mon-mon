@@ -1,11 +1,11 @@
 <h1>
   {{title}}
+</h1>
 
-  <div>
-    received messages:
-    <div *ngFor="let message of receivedMessages">
-      {{message}}
-    </div>
+<div>
+  <h3>received packets:</h3>
+  <div class="packet" *ngFor="let packet of receivedPackets">
+    {{packet}}
   </div>
 
-</h1>
+</div>
