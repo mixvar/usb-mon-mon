@@ -17,11 +17,13 @@ installation: `npm install`
 
 ### development
 
-run frontend app: `npm run start-front`
+run frontend app with watcher: `npm run start-front` or `ng serve`
 
-run backend: `npm run start-back`
+run backend with watcher: `npm run start-back`
 
-build: `npm run build-all-prod`
+build: `npm run build` or `ng build`
 
-deploy: `npm run build-all-and-start-prod`
+build for production: `npm run build-prod` or `ng build -prod`
+
+start app after build: `npm run start-all`
 
