@@ -10,8 +10,8 @@ let serveContent;
 if(process.env.STANDALONE_BACKEND){
   serveContent = (response) => response.send('<h1>usb-mon-mon back running!</h1>');
 } else {
-  app.use(express.static(path.join(__dirname, '../../dist')));
-  serveContent = (response) => response.sendFile(__dirname+"../../dist/index.html");
+  app.use(express.static(path.join(__dirname, '../')));
+  serveContent = (response) => response.sendFile(__dirname+"../index.html");
 }
 
 app.get('/', (request, response) => {
