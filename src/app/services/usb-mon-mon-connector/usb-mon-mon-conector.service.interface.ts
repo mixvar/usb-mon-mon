@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Packet } from '../model/packet';
+import { Packet } from '../../model/packet';
 import { ServerStatus } from "app/model/server-status";
 
 abstract class IUsbMonMonConnector {

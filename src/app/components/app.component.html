@@ -1,10 +1,9 @@
 <h1>
   {{title}}
 </h1>
-
 <div>
   <h3>received packets:</h3>
-  <div class="packet" *ngFor="let packet of receivedPackets">
+  <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
     {{packet.date | moment:"HH:mm:ss:SS"}}: {{packet.rawRecord}}
   </div>
 

@@ -5,8 +5,10 @@ import { HttpModule } from '@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { AppComponent } from './components/app.component';
-import IUsbMonMonConnector from './services/usb-mon-mon-conector.service.interface';
-import { UsbMonMonConnector } from './services/usb-mon-mon-connector.service';
+import IUsbMonMonConnector from './services/usb-mon-mon-connector/usb-mon-mon-conector.service.interface';
+import { UsbMonMonConnector } from './services/usb-mon-mon-connector/usb-mon-mon-connector.service';
+import IPacketsService from './services/packets/packets.service.interface';
+import { PacketsService } from './services/packets/packets.service';
 import { MomentPipe } from './pipes/moment.pipe';
 
 const socketConfig: SocketIoConfig = {
@@ -27,6 +29,7 @@ const socketConfig: SocketIoConfig = {
   ],
   providers: [
     { provide: IUsbMonMonConnector, useClass: UsbMonMonConnector },
+    { provide: IPacketsService, useClass: PacketsService },
   ],
   bootstrap: [AppComponent]
 })

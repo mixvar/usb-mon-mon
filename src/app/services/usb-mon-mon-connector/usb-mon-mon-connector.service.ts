@@ -5,14 +5,14 @@ import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
 import IUsbMonMonConnector from './usb-mon-mon-conector.service.interface';
 
-import { Packet } from '../model/packet';
+import { Packet } from '../../model/packet';
 import { ServerStatus } from "app/model/server-status";
 
 @Injectable()
 export class UsbMonMonConnector implements IUsbMonMonConnector {
 
-  packets_: Subject<Packet> = new Subject();
-  status_: Subject<ServerStatus> = new ReplaySubject(1);
+  public packets_: Subject<Packet> = new Subject();
+  public status_: Subject<ServerStatus> = new ReplaySubject(1);
 
   constructor(private socket: Socket) {
     this.status_.next(ServerStatus.CONNECTING);

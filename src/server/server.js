@@ -28,7 +28,7 @@ app.get('/', (request, response) => {
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
   console.log('a user connected!');
-  serverStatus_.subscribe( // memoere leak if there are many connections
+  serverStatus_.subscribe( // memory leak
     (newStatus) => socket.emit('status', newStatus)
   );
 });
