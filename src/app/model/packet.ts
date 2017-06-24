@@ -28,7 +28,7 @@ export interface Packet {
     data?: string;
   };
 
-}
+};
 
 export enum EventType {
   Submission,

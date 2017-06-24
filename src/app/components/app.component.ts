@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import IUsbPacketsService from '../services/usb-packets.service.interface';
-import {Packet} from '../model/packet';
+import IUsbMonMonConnector from '../services/usb-mon-mon-conector.service.interface';
+import { Packet } from '../model/packet';
+import { ServerStatus } from '../model/server-status';
 
 @Component({
   selector: 'umm-root',
@@ -13,13 +14,15 @@ export class AppComponent implements OnInit {
   title = 'umm works!';
   receivedPackets: Packet[] = [];
 
-  constructor(private usbPacketsService: IUsbPacketsService) {
+  constructor(private usbPacketsService: IUsbMonMonConnector) {
   };
 
   ngOnInit(): void {
-    this.usbPacketsService.greetServer();
     this.usbPacketsService.packets_.subscribe(
       (packet) => this.receivedPackets.push(packet)
+    );
+    this.usbPacketsService.status_.subscribe(
+      (status: ServerStatus) => console.warn(`server status: ${ServerStatus[status]}`)
     );
   }
 

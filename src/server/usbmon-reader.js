@@ -14,7 +14,7 @@ module.exports = {
 
   watch: (usbmonOut) => {
     console.log(`usbmon-reader watching file '${usbmonOut}'`);
-    doStartWatching(usbmonOut);
+    startWatching(usbmonOut);
   },
 
   pause: () => {
@@ -34,15 +34,19 @@ module.exports = {
   )
 };
 
-function doStartWatching(usbmonOut) {
-  usbmonTail = new tail(usbmonOut, tailOptions);
+function startWatching(usbmonOut) {
+  try {
+    usbmonTail = new tail(usbmonOut, tailOptions);
 
-  usbmonTail.on("line", (record) => {
-    console.log(`received record: '${record}'`);
-    records_.next(record);
-  });
+    usbmonTail.on("line", (record) => {
+      console.log(`received record: '${record}'`);
+      records_.next(record);
+    });
 
-  usbmonTail.on("error", (error) => {
-    console.error('error while reading usbmon file!: ', error);
-  });
+    usbmonTail.on("error", (error) => {
+      records_.error(error);
+    });
+  } catch (error) {
+    records_.error(error);
+  }
 }

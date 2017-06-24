@@ -1,12 +1,12 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {SocketIoModule, SocketIoConfig} from 'ng-socket-io';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
-import {AppComponent} from './components/app.component';
-import IUsbPacketsService from './services/usb-packets.service.interface';
-import {UsbPacketsService} from './services/usb-packets.service';
+import { AppComponent } from './components/app.component';
+import IUsbMonMonConnector from './services/usb-mon-mon-conector.service.interface';
+import { UsbMonMonConnector } from './services/usb-mon-mon-connector.service';
 import { MomentPipe } from './pipes/moment.pipe';
 
 const socketConfig: SocketIoConfig = {
@@ -26,7 +26,7 @@ const socketConfig: SocketIoConfig = {
     SocketIoModule.forRoot(socketConfig),
   ],
   providers: [
-    {provide: IUsbPacketsService, useClass: UsbPacketsService},
+    { provide: IUsbMonMonConnector, useClass: UsbMonMonConnector },
   ],
   bootstrap: [AppComponent]
 })
