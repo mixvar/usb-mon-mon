@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-import {Socket} from 'ng-socket-io';
+import { Socket } from 'ng-socket-io';
 
 import IUsbPacketsService from './usb-packets.service.interface';
-
+import { Packet } from '../model/packet';
 
 @Injectable()
 export class UsbPacketsService implements IUsbPacketsService {
 
-  packetsObs: Subject<string> = new Subject();
+  packets_: Subject<Packet> = new Subject();
 
   constructor(private socket: Socket) {
     this.receiveGreetings();
@@ -26,8 +26,10 @@ export class UsbPacketsService implements IUsbPacketsService {
   }
 
   private receivePackets() {
-    this.socket.on('packet', (packet) =>
-      this.packetsObs.next(packet));
+    this.socket.on('packet', (packet) => {
+      console.debug('received packet', packet);
+      this.packets_.next(packet);
+    });
   }
 
 }

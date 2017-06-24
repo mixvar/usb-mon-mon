@@ -5,22 +5,10 @@ const tailOptions = {
   useWatchFile: true,
   fsWatchOptions: { interval: 100 }
 };
+const usbmonParser = require('./usbmon-parser');
 
 let records_ = new rx.Subject;
 let usbmonTail;
-
-function doStartWatching(usbmonOut) {
-  usbmonTail = new tail(usbmonOut, tailOptions);
-
-  usbmonTail.on("line", (record) => {
-    console.log(`received record: '${record}'`);
-    records_.next(record);
-  });
-
-  usbmonTail.on("error", (error) => {
-    console.error('error while reading usbmon file!: ', error);
-  });
-}
 
 module.exports = {
 
@@ -39,5 +27,22 @@ module.exports = {
     usbmonTail.watch();
   },
 
-  getPackets: () => (records_)
+  getPackets: () => (
+    records_
+      .map(record => usbmonParser.parseRecord(record))
+      .filter(packet => !packet.isInvalid)
+  )
 };
+
+function doStartWatching(usbmonOut) {
+  usbmonTail = new tail(usbmonOut, tailOptions);
+
+  usbmonTail.on("line", (record) => {
+    console.log(`received record: '${record}'`);
+    records_.next(record);
+  });
+
+  usbmonTail.on("error", (error) => {
+    console.error('error while reading usbmon file!: ', error);
+  });
+}

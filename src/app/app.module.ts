@@ -7,6 +7,7 @@ import {SocketIoModule, SocketIoConfig} from 'ng-socket-io';
 import {AppComponent} from './components/app.component';
 import IUsbPacketsService from './services/usb-packets.service.interface';
 import {UsbPacketsService} from './services/usb-packets.service';
+import { MomentPipe } from './pipes/moment.pipe';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -15,7 +16,8 @@ const socketConfig: SocketIoConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MomentPipe
   ],
   imports: [
     BrowserModule,

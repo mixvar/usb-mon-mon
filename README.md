@@ -1,9 +1,9 @@
 # usb-mon-mon
-### web app interface for linux kernel's usbmon debug tool
+### web interface for linux kernel's usbmon debug tool
 
 Frontend app created with [Angular](https://angular.io/)
 
-Server/Backend created with [Node](https://nodejs.org/) and [Express](https://expressjs.com/)
+Server/Backend created with [Node](https://nodejs.org/)
 
 
 ### installation

@@ -5,7 +5,7 @@
 <div>
   <h3>received packets:</h3>
   <div class="packet" *ngFor="let packet of receivedPackets">
-    {{packet}}
+    {{packet.date | moment:"HH:mm:ss:SSS"}}: {{packet.rawRecord}}
   </div>
 
 </div>
