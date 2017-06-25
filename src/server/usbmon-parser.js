@@ -27,13 +27,13 @@ function parseContent(rawRecord) {
   const record = new ParsableString(rawRecord);
   let parsedData = {};
 
-  parsedData.urbTag = parseUrbTag(record.takeWords(1));
-  parsedData.timestamp = parseTimestamp(record.takeWords(1));
-  parsedData.eventType = parseEventType(record.takeWords(1));
+  parsedData.urbTag = parseUrbTag(record.takeWord());
+  parsedData.timestamp = parseTimestamp(record.takeWord());
+  parsedData.eventType = parseEventType(record.takeWord());
 
-  Object.assign(parsedData, parseAddress(record.takeWords(1)));
+  Object.assign(parsedData, parseAddress(record.takeWord()));
 
-  const statusField = record.takeWords(1);
+  const statusField = record.takeWord();
   if (/[a-zA-Z]/.test(statusField)) {
     parsedData.setupPacket = parseSetupPacket(statusField, record.takeWords(5));
   } else {
@@ -41,7 +41,7 @@ function parseContent(rawRecord) {
   }
 
   if (parsedData.urbType === model.UrbType.Isochronous) { // TODO verify
-    const isochronousDescritorsCount = +record.takeWords(1);
+    const isochronousDescritorsCount = +record.takeWord();
     if (isNaN(isochronousDescritorsCount))
       throw new Error(`expected to find isochronousDescritorsCount (number), but found: '${isochronousDescritorsCount}'!`);
     parsedData.isochronousFrameDescriptors = parseIsochronousFrameDescriptors(
@@ -89,13 +89,14 @@ function parseAddress(value) {
   const address = new ParsableString(value, ':');
   let parsedData = {};
 
-  parsedData.urbType = parseUrbType(address.getWord(0).charAt(0));
-  parsedData.direction = parseDircetion(address.getWord(0).charAt(1));
-  address.takeWords(1);
+  const typeDir = address.takeWord();
+  parsedData.urbType = parseUrbType(typeDir.charAt(0));
+  parsedData.direction = parseDircetion(typeDir.charAt(1));
 
-  parsedData.busNumber = parseBusNumber(address.takeWords(1));
-  parsedData.deviceAddress = parseDeviceAddress(address.takeWords(1));
-  parsedData.endpointNumber = parseEndpointNumber(address.takeWords(1));
+
+  parsedData.busNumber = parseBusNumber(address.takeWord());
+  parsedData.deviceAddress = parseDeviceAddress(address.takeWord());
+  parsedData.endpointNumber = parseEndpointNumber(address.takeWord());
 
   if (!address.isEmpty())
     throw new Error(`invalid address: '${value}'!`);
@@ -188,13 +189,13 @@ function parseIsochronousFrameDescriptors(descriptors) {
 
 function parseData(value) {
   const parsable = new ParsableString(value);
-  const output = { dataBytesCount: +parsable.takeWords(1) };
+  const output = { dataBytesCount: +parsable.takeWord() };
 
   if (isNaN(output.dataBytesCount))
     throw new Error(`expected to find dataSize (number), but found: '${dataSize}'!`);
 
   if (output.dataBytesCount !== 0) {
-    const dataTag = parsable.takeWords(1);
+    const dataTag = parsable.takeWord();
     if (dataTag === '=') {
       output.data = parsable.value;
     }

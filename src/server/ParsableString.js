@@ -9,11 +9,15 @@ module.exports = class ParsableString {
     this.separator = separator;
   }
 
+  takeWord() {
+    return this.takeWords(1);
+  }
+
   takeWords(count) {
     if (count === 0)
       return;
 
-    if (this.value === '')
+    if (this.isEmpty())
       throw new Error(`parsable [${this.initialValue}] is empty!`);
 
     let words = this.value.split(this.separator);
@@ -30,18 +34,6 @@ module.exports = class ParsableString {
 
     // console.log(`parsable [${this.initialValue}]: value: '${this.value}'`);
     return (extractedWords.length === 1) ? extractedWords[0] : extractedWords;
-  }
-
-  getWord(index) {
-    if (this.value === '')
-      throw new Error(`parsable [${this.initialValue}] is empty!`);
-
-    const words = this.value.split(this.separator);
-
-    if (Math.abs(index) >= words.count)
-      throw new Error(`parsable [${this.initialValue}] does not contain ${Math.abs(index) + 1} words!`);
-
-    return (index < 0) ? words[words.length + index] : words[index];
   }
 
   isEmpty() {
