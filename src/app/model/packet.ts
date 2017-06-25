@@ -11,17 +11,18 @@ export interface Packet {
     deviceAddress: number;
     endpointNumber: number;
     urbStatus?: {
-      status: string;
+      status: number;
       interval?: number;
       startFrame?: number;
       errorCount?: number;
-      setupTag?: {
-        bmRequestType: string;
-        bRequest: string;
-        wValue: string;
-        wIndex: string;
-        wLength: string;
-      };
+    };
+    setupPacket?: {
+      setupTag: string;
+      bmRequestType?: string;
+      bRequest?: string;
+      wValue?: string;
+      wIndex?: string;
+      wLength?: string;
     };
     isochronousFrameDescriptors?: string[];
     dataBytesCount: number;
