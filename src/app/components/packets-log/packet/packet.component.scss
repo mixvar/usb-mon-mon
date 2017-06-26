@@ -11,12 +11,13 @@
     padding: 1.5*$spacing $spacing;
     margin: 1.5*$spacing 0;
     cursor: pointer;
-    transition: all 400ms ease-out;
+    transition: all 400ms ease-out 100ms;
     width: 100%;
     &:hover {
       @include shadow(2px, transparentize($colorThemePrimary, 0.2));
       color: lighten($colorThemePrimary, 10);
       background: $colorThemeSecondary;
+      transition: all 400ms ease-out;
     }
   }
 

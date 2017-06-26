@@ -19,18 +19,15 @@ export class PacketsService implements IPacketsService {
 
   public setBufferSize(newSize: number): void {
     if (newSize < this.bufferSize) {
-      this.packetsBuffer = this.packetsBuffer.slice(
-        this.packetsBuffer.length - newSize,
-        this.packetsBuffer.length
-      );
+      this.packetsBuffer = this.packetsBuffer.slice(0, this.packetsBuffer.length);
     }
     this.bufferSize = newSize;
   }
 
   private onNewPacket(packet: Packet) {
     if (this.packetsBuffer.length === this.bufferSize) {
-      this.packetsBuffer.shift();
+      this.packetsBuffer.pop();
     }
-    this.packetsBuffer.push(packet);
+    this.packetsBuffer.unshift(packet);
   }
 }

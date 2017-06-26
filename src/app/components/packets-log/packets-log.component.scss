@@ -8,7 +8,7 @@
   padding: $spacing 2*$spacing;
   padding-top: $headerHeight + $spacing;
   background: $colorThemeSecondary;
-  color: $colorFont;
+  color: lighten($colorThemeAccent, 20);
 
   #packetsContainer {
   }
