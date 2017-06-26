@@ -1,0 +1,12 @@
+<div id="dashboardComponent">
+  <umm-header></umm-header>
+
+  <div class="horAlign">
+
+    <h3>received packets:</h3>
+    <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
+      <umm-packet [packet]="packet"></umm-packet>
+    </div>
+
+  </div>
+</div>

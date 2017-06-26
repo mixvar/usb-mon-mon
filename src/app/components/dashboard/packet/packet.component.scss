@@ -1,0 +1,23 @@
+@import '~app/styles/styles';
+
+// TODO transitions
+#packetComponent {
+  padding: $spacing/2;
+  #record{
+     background: lighten($colorFontSecondary, 10);
+     color: $colorThemePrimary;
+     padding: $spacing;
+     cursor: pointer;
+     transition: all 300ms ease-in-out 50ms;
+  }
+  &:hover {
+    #record{
+      padding: $spacing*1.8 $spacing;
+      font-size: 105%;
+      @include shadow(2px, transparentize($colorThemePrimary, 0.2));
+      color: lighten($colorThemePrimary, 10);
+      background: lighten($colorFontSecondary, 15);
+      transition: all 300ms ease;
+    }
+  }
+}

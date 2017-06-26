@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs/Observable';
 import { Packet } from '../../model/packet';
-import { ServerStatus } from "app/model/server-status";
+import { AppStatus } from "app/model/app-status";
 
 abstract class IUsbMonMonConnector {
 
-  abstract status_: Observable<ServerStatus>;
+  abstract status_: Observable<AppStatus>;
   abstract packets_: Observable<Packet>;
 }
 

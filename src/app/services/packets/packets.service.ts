@@ -9,7 +9,7 @@ import { Packet } from "app/model/packet";
 export class PacketsService implements IPacketsService {
 
   public packetsBuffer: Packet[] = [];
-  private bufferSize: number = 10;
+  private bufferSize: number = 500;
 
   constructor(private ummConnector: IUsbMonMonConnector) {
     ummConnector.packets_.subscribe(

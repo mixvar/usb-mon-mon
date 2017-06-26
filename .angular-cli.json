@@ -20,7 +20,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "umm",
       "styles": [
-        "styles.scss"
+        "./app/styles/flexboxgrid.css",
+        "./app/styles/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

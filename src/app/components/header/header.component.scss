@@ -1,0 +1,20 @@
+@import '~app/styles/styles';
+
+#headerComponent{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $headerHeight;
+  background: transparentize(darken($colorThemeSecondary, 0.1), 0.085);
+  color: $colorThemePrimary;
+
+  .row {
+    height: $headerHeight;
+  }
+
+  .title{
+    font-size: 38px;
+  }
+
+}

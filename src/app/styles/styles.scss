@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+/* variables */
+$headerHeight: 80px;
+$spacing: 10px;
+$contentWidth: 1000px;
+
+$fontSize: 16px;
+$fontSizeSubHeader: 22px;
+$fontSizeHeader: 30px;
+
+// TODO
+$colorThemePrimary: #7986CB; // indigo 300
+$colorThemeAccent: #4DB6AC; // teal 300
+$colorThemeSecondary: #37474F; // blue-grey 800
+$colorFontSecondary: #1f1f1f;
+
+
+/* mixins */
+
+@mixin simpleShadowBot {
+  box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.7);
+}
+
+@mixin shadow($size, $color) {
+  box-shadow: $size $size $size*4 0 $color, -1*$size -1*$size $size*4 0 $color, -1*$size $size $size*4 0 $color, $size -1*$size $size*4 0 $color;
+}
+
+@mixin fontStyle($style) {
+  @if $style == light {
+    font-weight: 300;
+  }
+  @if $style == regular {
+    font-weight: 400;
+  }
+  @if $style == bold {
+    font-weight: 700;
+  }
+}
+
+
+/* styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: $fontSize;
+}
+
+.horAlign {
+  max-width: $contentWidth;
+  margin: 0 auto;
+}
+.horLeft {
+  text-align: left;
+}
+.horCenter {
+  text-align: center;
+}
+.horRight {
+  text-align: right;
+}
+
+.bold {
+  @include fontStyle(bold);
+}
+.light {
+  @include fontStyle(light);
+}
+
+.header {
+  font-size: $fontSizeHeader;
+  padding-bottom: $spacing;
+}
+
+.subHeader {
+  font-size: $fontSizeSubHeader;
+  padding-bottom: $spacing;
+}
+
+.padded {
+  padding: $spacing;
+}
+
+.spaced {
+  margin: $spacing;
+}
+
+.vSpaced {
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+}
+
+/* overrides */
+
+.col {
+  padding: $spacing;
+}

@@ -1,0 +1,12 @@
+@import '~app/styles/styles';
+
+#dashboardComponent{
+
+  min-height: 100vh;
+  padding: $spacing;
+  padding-top: $headerHeight;
+  background: $colorFontSecondary;
+  color: white;
+
+}
+

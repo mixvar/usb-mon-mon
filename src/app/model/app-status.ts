@@ -1,4 +1,4 @@
-export enum ServerStatus {
+export enum AppStatus {
   OK,
   ERROR_NO_USBMON_OUT_PARAM,
   ERROR_USBMON_OUT_NOT_FOUND,

@@ -10,6 +10,9 @@ import { UsbMonMonConnector } from './services/usb-mon-mon-connector/usb-mon-mon
 import IPacketsService from './services/packets/packets.service.interface';
 import { PacketsService } from './services/packets/packets.service';
 import { MomentPipe } from './pipes/moment.pipe';
+import { HeaderComponent } from './components/header/header.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PacketComponent } from './components/dashboard/packet/packet.component';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -19,7 +22,10 @@ const socketConfig: SocketIoConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MomentPipe
+    MomentPipe,
+    HeaderComponent,
+    DashboardComponent,
+    PacketComponent
   ],
   imports: [
     BrowserModule,
