@@ -6,7 +6,7 @@ import { Socket } from 'ng-socket-io';
 import IUsbMonMonConnector from './usb-mon-mon-conector.service.interface';
 
 import { Packet } from '../../model/packet';
-import { AppStatus } from "app/model/app-status";
+import { AppStatus } from 'app/model/app-status';
 
 @Injectable()
 export class UsbMonMonConnector implements IUsbMonMonConnector {

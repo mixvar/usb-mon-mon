@@ -1,13 +1,17 @@
+//noinspection CssUnknownTarget
 @import '~app/styles/styles';
 
 #headerComponent{
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
   height: $headerHeight;
-  background: transparentize(darken($colorThemeSecondary, 0.1), 0.085);
+  background: transparentize(darken($colorThemeAccent, 2), 0.085);
   color: $colorThemePrimary;
+  @include simpleShadowBot();
+  padding: 0 $spacing;
 
   .row {
     height: $headerHeight;
@@ -15,6 +19,11 @@
 
   .title{
     font-size: 38px;
+  }
+
+  .status {
+    color: $colorFont;
+    text-align: center;
   }
 
 }

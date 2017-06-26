@@ -11,8 +11,8 @@ import IPacketsService from './services/packets/packets.service.interface';
 import { PacketsService } from './services/packets/packets.service';
 import { MomentPipe } from './pipes/moment.pipe';
 import { HeaderComponent } from './components/header/header.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PacketComponent } from './components/dashboard/packet/packet.component';
+import { PacketsLogComponent } from './components/packets-log/packets-log.component';
+import { PacketComponent } from './components/packets-log/packet/packet.component';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -24,7 +24,7 @@ const socketConfig: SocketIoConfig = {
     AppComponent,
     MomentPipe,
     HeaderComponent,
-    DashboardComponent,
+    PacketsLogComponent,
     PacketComponent
   ],
   imports: [

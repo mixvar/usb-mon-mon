@@ -24,9 +24,9 @@ module.exports = class ParsableString {
     if (words.length < Math.abs(count))
       throw new Error(`parsable [${this.initialValue}] does not contain ${Math.abs(count)} words!`);
 
-    let extractedWords = (count > 0) ?
-      words.splice(0, count) :
-      words.splice(count, -count)
+    let extractedWords = (count > 0)
+      ? words.splice(0, count)
+      : words.splice(count, -count);
 
     let newValue = words.reduce((acc, word) => (acc + word + this.separator), '');
     newValue = newValue.substring(0, newValue.length - this.separator.length);
@@ -40,5 +40,5 @@ module.exports = class ParsableString {
     return !!(this.value === '');
   }
 
-}
+};
 

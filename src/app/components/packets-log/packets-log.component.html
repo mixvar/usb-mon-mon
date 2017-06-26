@@ -1,0 +1,15 @@
+<div id="packetsLogComponent">
+  <umm-header></umm-header>
+
+  <div class="horAlign">
+
+    <div class="header horCenter">Packets Log</div>
+
+    <div id="packetsContainer">
+      <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
+        <umm-packet [packet]="packet"></umm-packet>
+      </div>
+    </div>
+
+  </div>
+</div>

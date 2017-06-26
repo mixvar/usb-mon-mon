@@ -9,17 +9,16 @@ $fontSize: 16px;
 $fontSizeSubHeader: 22px;
 $fontSizeHeader: 30px;
 
-// TODO
-$colorThemePrimary: #7986CB; // indigo 300
-$colorThemeAccent: #4DB6AC; // teal 300
-$colorThemeSecondary: #37474F; // blue-grey 800
-$colorFontSecondary: #1f1f1f;
+$colorThemePrimary: #9575CD; // deep purple 300
+$colorThemeAccent: #455A64; // blue-grey 700
+$colorThemeSecondary: #212121; // grey 900
+$colorFont: #BDBDBD; // grey 900
 
 
 /* mixins */
 
 @mixin simpleShadowBot {
-  box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.8);
 }
 
 @mixin shadow($size, $color) {
