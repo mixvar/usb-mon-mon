@@ -28,7 +28,7 @@
 
     <div id="packetsContainer">
       <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
-        <umm-packet [packet]="packet"></umm-packet>
+        <umm-packet [packet]="packet" (click)="showPacketDetails(packet)"></umm-packet>
       </div>
     </div>
 

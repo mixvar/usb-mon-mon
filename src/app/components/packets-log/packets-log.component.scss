@@ -6,12 +6,13 @@
 
   min-height: 100vh;
   padding: $spacing 2*$spacing;
-  padding-top: $headerHeight + $spacing;
+  padding-top: $headerHeight + 2*$spacing;
   background: $colorThemeSecondary;
   color: lighten($colorThemeAccent, 20);
 
   #labelsContainer{
-    margin-top: 3*$spacing;
+    padding: 0 $spacing;
+    margin-top: 2*$spacing;
     text-align: center;
     @include fontStyle(light);
   }

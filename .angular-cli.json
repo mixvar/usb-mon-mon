@@ -21,7 +21,8 @@
       "prefix": "umm",
       "styles": [
         "./app/styles/flexboxgrid.css",
-        "./app/styles/styles.scss"
+        "./app/styles/styles.scss",
+        "./app/styles/theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
