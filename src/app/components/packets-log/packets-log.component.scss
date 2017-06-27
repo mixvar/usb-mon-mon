@@ -10,6 +10,12 @@
   background: $colorThemeSecondary;
   color: lighten($colorThemeAccent, 20);
 
+  #labelsContainer{
+    margin-top: 3*$spacing;
+    text-align: center;
+    @include fontStyle(light);
+  }
+
   #packetsContainer {
   }
 

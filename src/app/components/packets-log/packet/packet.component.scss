@@ -6,9 +6,10 @@
 #packetComponent {
 
   .content {
+    text-align: center;
     background: lighten($colorThemeSecondary, 10);
     color: $colorThemePrimary;
-    padding: 1.5*$spacing $spacing;
+    padding: 1.5*$spacing 0;
     margin: 1.5*$spacing 0;
     cursor: pointer;
     transition: all 400ms ease-out 100ms;

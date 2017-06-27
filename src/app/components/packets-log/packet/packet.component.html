@@ -1,6 +1,30 @@
 <div id="packetComponent">
 
-    <div class="content">
-      {{packet.date | moment:"HH:mm:ss:SS"}}: {{packet.rawRecord}}
+    <div class="row content">
+
+      <div class="col-xs-3 col-md-2">
+        {{packet.date | moment:"HH:mm:ss:SS"}}
+      </div>
+
+      <div class="col-xs-1 col-md-2">
+        {{packet.parsedData.busNumber}}
+      </div>
+
+      <div class="col-xs-1 col-md-2">
+        {{getDirection(packet)}}
+      </div>
+
+      <div class="col-xs-3 col-md-2">
+        {{getEventType(packet)}}
+      </div>
+
+      <div class="col-xs-2 col-md-2">
+        {{getUrbType(packet)}}
+      </div>
+
+      <div class="col-xs-2 col-md-2">
+        {{packet.parsedData.dataBytesCount}} B
+      </div>
+
     </div>
 </div>

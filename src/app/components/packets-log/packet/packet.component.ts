@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Packet } from '../../../model/packet';
-import { Direction } from 'app/model/packet';
+import { Packet, Direction, EventType, UrbType } from 'app/model/packet';
 
 @Component({
   selector: 'umm-packet',
@@ -13,11 +12,17 @@ export class PacketComponent {
   @Input()
   packet: Packet;
 
-  constructor() {
-  }
+  constructor() { }
 
   getDirection(packet: Packet): string {
     return Direction[packet.parsedData.direction];
   }
 
+  getEventType(packet: Packet): string {
+    return EventType[packet.parsedData.eventType];
+  }
+
+  getUrbType(packet: Packet): string {
+    return UrbType[packet.parsedData.urbType];
+  }
 }

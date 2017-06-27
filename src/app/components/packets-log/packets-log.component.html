@@ -5,6 +5,27 @@
 
     <div class="header horCenter">Packets Log</div>
 
+    <div *ngIf="packetsService.packetsBuffer.length" id="labelsContainer" class="row">
+      <div class="col-xs-3 col-md-2">
+        timestamp
+      </div>
+      <div class="col-xs-1 col-md-2">
+        bus
+      </div>
+      <div class="col-xs-1 col-md-2">
+        direction
+      </div>
+      <div class="col-xs-3 col-md-2">
+        event
+      </div>
+      <div class="col-xs-2 col-md-2">
+        type
+      </div>
+      <div class="col-xs-2 col-md-2">
+        data
+      </div>
+    </div>
+
     <div id="packetsContainer">
       <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
         <umm-packet [packet]="packet"></umm-packet>
