@@ -1,23 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
-import IUsbMonMonConnector from './usb-mon-mon-conector.service.interface';
+import { plainToClass } from 'class-transformer';
 
+import IUsbMonMonConnector from './usb-mon-mon-conector.service.interface';
 import { Packet } from '../../model/packet';
 import { AppStatus } from 'app/model/app-status';
+
 
 @Injectable()
 export class UsbMonMonConnector implements IUsbMonMonConnector {
 
-  public packets_: Subject<Packet> = new Subject();
-  public status_: Subject<AppStatus> = new ReplaySubject(1);
+  private packets_: Subject<Packet> = new Subject();
+  private status_: Subject<AppStatus> = new ReplaySubject(1);
 
   constructor(private socket: Socket) {
     this.status_.next(AppStatus.CONNECTING);
     this.receiveStatus();
     this.receivePackets();
+  }
+
+  public getPackets_(): Observable<Packet> {
+    return this.packets_
+      .map((packet) => plainToClass(Packet, packet));
+  }
+
+  public getStatus_(): Observable<AppStatus> {
+    return this.status_;
   }
 
   private receiveStatus() {

@@ -6,6 +6,7 @@ $spacing: 10px;
 $contentWidth: 1000px;
 
 $fontSize: 16px;
+$fontSizeValue: 19px;
 $fontSizeSubHeader: 22px;
 $fontSizeHeader: 30px;
 
@@ -13,7 +14,6 @@ $colorThemePrimary: #9575CD; // deep purple 300
 $colorThemeAccent: #455A64; // blue-grey 700
 $colorThemeSecondary: #212121; // grey 900
 $colorFont: #BDBDBD; // grey 900
-
 
 /* mixins */
 
@@ -37,7 +37,6 @@ $colorFont: #BDBDBD; // grey 900
   }
 }
 
-
 /* styles */
 
 * {
@@ -54,12 +53,15 @@ body {
   max-width: $contentWidth;
   margin: 0 auto;
 }
+
 .horLeft {
   text-align: left;
 }
+
 .horCenter {
   text-align: center;
 }
+
 .horRight {
   text-align: right;
 }
@@ -67,6 +69,7 @@ body {
 .bold {
   @include fontStyle(bold);
 }
+
 .light {
   @include fontStyle(light);
 }
@@ -92,6 +95,22 @@ body {
 .vSpaced {
   margin-top: $spacing;
   margin-bottom: $spacing;
+}
+
+/* outer classes */
+
+.packetDetailsDialog {
+  width: 100%;
+  //height: 400px;
+  .mat-dialog-container {
+    max-width: none;
+    padding: 0;
+    @include shadow(15px, rgba(0, 0, 0, 0.3));
+    .mat-dialog-content {
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
 
 /* overrides */

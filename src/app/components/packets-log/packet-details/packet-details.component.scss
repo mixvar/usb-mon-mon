@@ -1,0 +1,42 @@
+//noinspection CssUnknownTarget
+@import '~app/styles/styles';
+
+#packetDetailsComponent {
+
+  .row {
+    text-align: center;
+    padding: 0;
+  }
+  .value {
+    color: $colorThemePrimary;
+    font-size: $fontSizeValue;
+  }
+  .label {
+    color: lighten($colorThemeAccent, 25);
+    font-size: $fontSize;
+    @include fontStyle(light);
+    margin-top: $spacing/2;
+  }
+
+  #mainRow {
+    padding: 2*$spacing 0;
+    background: $colorThemeSecondary;
+    box-shadow: inset 0 7px 10px -5px $colorThemePrimary;
+    .value {
+      font-size: $fontSizeSubHeader;
+    }
+  }
+
+  #body {
+    .cell {
+      padding: 2*$spacing 8px;
+    }
+  }
+
+  #rawPacket {
+    .value {
+      color: $colorThemeSecondary;
+    }
+  }
+
+}

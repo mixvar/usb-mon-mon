@@ -1,5 +1,103 @@
 <div id="packetDetailsComponent">
   <md-dialog-content>
-    <pre>{{packet | json}}</pre>
+
+    <div id="mainRow">
+      <div class="row horAlign <3">
+        <div class="col-xs-3 col-md-2">
+          <div class="value">{{packet.date | moment:"HH:mm:ss:SS"}}</div>
+          <div class="label">timestamp</div>
+        </div>
+        <div class="col-xs-1 col-md-2">
+          <div class="value">{{packet.parsedData.busNumber}}</div>
+          <div class="label">bus</div>
+        </div>
+        <div class="col-xs-1 col-md-2">
+          <div class="value">{{packet.getDirection()}}</div>
+          <div class="label">direction</div>
+        </div>
+        <div class="col-xs-3 col-md-2">
+          <div class="value">{{packet.getEventType()}}</div>
+          <div class="label">event</div>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <div class="value">{{packet.getUrbType()}}</div>
+          <div class="label">type</div>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <div class="value">{{packet.parsedData.dataBytesCount}} B</div>
+          <div class="label">data size</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="body">
+      <div class="row center-xs middle-xs horAlign">
+        <div class="col-xs-3 cell">
+          <div class="value">{{packet.parsedData.urbTag}}</div>
+          <div class="label">URB tag</div>
+        </div>
+        <div class="col-xs-3 cell">
+          <div class="value">{{packet.parsedData.deviceAddress}}</div>
+          <div class="label">device address</div>
+        </div>
+        <div class="col-xs-3 cell">
+          <div class="value">{{packet.parsedData.endpointNumber}}</div>
+          <div class="label">endpoint number</div>
+        </div>
+        <div class="col-xs-6 cell" *ngIf="packet.getIsochronousFrameDescriptors()">
+          <div class="value">{{packet.getIsochronousFrameDescriptors()}}</div>
+          <div class="label">frame descriptors</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.urbStatus.status">
+          <div class="value">{{packet.parsedData.urbStatus.status}}</div>
+          <div class="label">URB status</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.urbStatus.interval">
+          <div class="value">{{packet.parsedData.urbStatus.interval}}</div>
+          <div class="label">interval</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.urbStatus.startFrame">
+          <div class="value">{{packet.parsedData.urbStatus.startFrame}}</div>
+          <div class="label">start frame</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.urbStatus.errorCount">
+          <div class="value">{{packet.parsedData.urbStatus.errorCount}}</div>
+          <div class="label">error count</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.setupTag">
+          <div class="value">{{packet.parsedData.setupPacket.setupTag}}</div>
+          <div class="label">setup packet tag</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.bmRequestType">
+          <div class="value">{{packet.parsedData.setupPacket.bmRequestType}}</div>
+          <div class="label">bmRequestType</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.bRequest">
+          <div class="value">{{packet.parsedData.setupPacket.bRequest}}</div>
+          <div class="label">bRequest</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.wValue">
+          <div class="value">{{packet.parsedData.setupPacket.wValue}}</div>
+          <div class="label">wValue</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.wIndex">
+          <div class="value">{{packet.parsedData.setupPacket.wIndex}}</div>
+          <div class="label">wIndex</div>
+        </div>
+        <div class="col-xs-3 cell" *ngIf="packet.parsedData.setupPacket.wLength">
+          <div class="value">{{packet.parsedData.setupPacket.wLength}}</div>
+          <div class="label">wLength</div>
+        </div>
+        <div class="col-xs-9 cell" *ngIf="packet.parsedData.data">
+          <div class="value">{{packet.parsedData.data}}</div>
+          <div class="label">captured data</div>
+        </div>
+        <div class="col-xs-9 cell" id="rawPacket">
+          <div class="value">{{packet.rawRecord}}</div>
+          <div class="label">raw packet</div>
+        </div>
+      </div>
+    </div>
+
   </md-dialog-content>
 </div>

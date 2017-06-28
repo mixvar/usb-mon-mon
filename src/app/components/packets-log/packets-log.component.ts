@@ -21,8 +21,7 @@ export class PacketsLogComponent implements OnInit {
   showPacketDetails(packet: Packet) {
     this.dialog.open(PacketDetailsComponent, {
       data: packet,
-      height: '600px',
-      width: '800px',
+      panelClass: 'packetDetailsDialog',
     });
   }
 

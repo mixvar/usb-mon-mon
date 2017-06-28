@@ -34,19 +34,21 @@ function parseContent(rawRecord) {
   Object.assign(parsedData, parseAddress(record.takeWord()));
 
   const statusField = record.takeWord();
-  if (/[a-zA-Z]/.test(statusField)) {
+  parsedData.setupPacket = {};
+  parsedData.urbStatus = {};
+  if (hasSetupPacket(parsedData.eventType, parsedData.urbType, statusField)) {
     parsedData.setupPacket = parseSetupPacket(statusField, record.takeWords(5));
   } else {
-    parsedData.urbStatus = parseUrbStatus(statusField);
+    parsedData.urbStatus = parseUrbStatus(parsedData.eventType, statusField);
   }
 
   if (parsedData.urbType === model.UrbType.Isochronous) { // TODO verify
     const isochronousDescritorsCount = +record.takeWord();
     if (isNaN(isochronousDescritorsCount))
       throw new Error(`expected to find isochronousDescritorsCount (number), but found: '${isochronousDescritorsCount}'!`);
-    parsedData.isochronousFrameDescriptors = parseIsochronousFrameDescriptors(
-      record.takeWords(isochronousDescritorsCount)
-    );
+    parsedData.isochronousFrameDescriptors = (isochronousDescritorsCount)
+      ? parseIsochronousFrameDescriptors(record.takeWords(isochronousDescritorsCount))
+      : [];
   }
 
   Object.assign(parsedData, parseData(record.value));
@@ -148,8 +150,12 @@ function parseEndpointNumber(value) {
   return +value;
 }
 
+function hasSetupPacket(eventType, urbType, statusWord) {
+  return (eventType === model.EventType.Submission && urbType === model.UrbType.Control && /[a-zA-Z]/.test(statusWord));
+}
+
 function parseSetupPacket(setupTag, setupPacketData) {
-  const setupPacket = { setupTag };
+  const setupPacket = {setupTag};
 
   if (setupTag === 's') { // safe to decode
     setupPacket.bmRequestType = setupPacketData[0];
@@ -162,7 +168,7 @@ function parseSetupPacket(setupTag, setupPacketData) {
   return setupPacket;
 }
 
-function parseUrbStatus(value) {
+function parseUrbStatus(eventType, value) {
   const urbStatusData = value.split(':');
 
   function getUrbStatusDataIfPresent(index) {
@@ -173,11 +179,11 @@ function parseUrbStatus(value) {
   }
 
   return {
-    status: urbStatusData[0],
+    status: (eventType !== model.EventType.Submission) ? urbStatusData[0] : undefined,
     interval: getUrbStatusDataIfPresent(1),
     startFrame: getUrbStatusDataIfPresent(2),
     errorCount: getUrbStatusDataIfPresent(3),
-  }
+  };
 }
 
 function parseIsochronousFrameDescriptors(descriptors) {
@@ -189,7 +195,7 @@ function parseIsochronousFrameDescriptors(descriptors) {
 
 function parseData(value) {
   const parsable = new ParsableString(value);
-  const output = { dataBytesCount: +parsable.takeWord() };
+  const output = {dataBytesCount: +parsable.takeWord()};
 
   if (isNaN(output.dataBytesCount))
     throw new Error(`expected to find dataSize (number), but found: '${dataSize}'!`);

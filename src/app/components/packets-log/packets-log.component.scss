@@ -3,12 +3,13 @@
 
 
 #packetsLogComponent{
-
+  user-select: none;
   min-height: 100vh;
   padding: $spacing 2*$spacing;
   padding-top: $headerHeight + 2*$spacing;
+  padding-bottom: 4*$spacing;
   background: $colorThemeSecondary;
-  color: lighten($colorThemeAccent, 20);
+  color: lighten($colorThemeAccent, 25);
 
   #labelsContainer{
     padding: 0 $spacing;

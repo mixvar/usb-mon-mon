@@ -12,7 +12,7 @@ export class PacketsService implements IPacketsService {
   private bufferSize = 5000;
 
   constructor(private ummConnector: IUsbMonMonConnector) {
-    ummConnector.packets_.subscribe(
+    ummConnector.getPackets_().subscribe(
       (packet) => this.onNewPacket(packet)
     );
   }
