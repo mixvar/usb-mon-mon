@@ -1,36 +1,36 @@
 <div id="packetsLogComponent">
   <umm-header></umm-header>
 
-  <div class="horAlign">
 
-    <div class="header horCenter">Packets Log</div>
+  <div class="header horCenter">Packets Log</div>
 
-    <div *ngIf="packetsService.packetsBuffer.length" id="labelsContainer" class="row">
-      <div class="col-xs-3 col-md-2">
-        <span>timestamp</span>
-      </div>
-      <div class="col-xs-1 col-md-2">
-        <span>bus</span>
-      </div>
-      <div class="col-xs-1 col-md-2">
-        <span>direction</span>
-      </div>
-      <div class="col-xs-3 col-md-2">
-        <span>event</span>
-      </div>
-      <div class="col-xs-2 col-md-2">
-        <span>type</span>
-      </div>
-      <div class="col-xs-2 col-md-2">
-        <span>data</span>
-      </div>
+  <umm-packet-filters></umm-packet-filters>
+
+  <div *ngIf="packetsService.packetsBuffer.length" id="labelsContainer" class="row horAlign">
+    <div class="col-xs-3 col-md-2">
+      <span>timestamp</span>
     </div>
-
-    <div id="packetsContainer">
-      <div class="packet" *ngFor="let packet of packetsService.packetsBuffer">
-        <umm-packet [packet]="packet" (click)="showPacketDetails(packet)"></umm-packet>
-      </div>
+    <div class="col-xs-1 col-md-2">
+      <span>bus</span>
     </div>
-
+    <div class="col-xs-1 col-md-2">
+      <span>direction</span>
+    </div>
+    <div class="col-xs-3 col-md-2">
+      <span>event</span>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <span>type</span>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <span>data</span>
+    </div>
   </div>
+
+  <div id="packetsContainer" class="horAlign">
+    <div class="packet" *ngFor="let packet of packetsService.filteredPacketsBuffer">
+      <umm-packet [packet]="packet" (click)="showPacketDetails(packet)"></umm-packet>
+    </div>
+  </div>
+
 </div>

@@ -1,0 +1,32 @@
+//noinspection CssUnknownTarget
+@import '~app/styles/styles';
+
+#packetFiltersComponent {
+
+  background: darken($colorThemeAccent, 5);
+  padding: 2*$spacing;
+  margin: 2*$spacing -2*$spacing;
+  border-top: 2px solid lighten($colorThemeAccent, 5);
+  border-bottom: 2px solid lighten($colorThemeAccent, 5);
+  color: lighten($colorThemePrimary, 5);
+
+  .header {
+    text-align: center;
+    font-size: $fontSizeHeader;
+    padding: 0;
+  }
+
+  .filter {
+    margin-top: 2*$spacing;
+  }
+
+  .label {
+    color: $colorThemeSecondary;
+    padding-bottom: $spacing;
+    font-size: 19px;
+  }
+
+  .value {
+  }
+
+}

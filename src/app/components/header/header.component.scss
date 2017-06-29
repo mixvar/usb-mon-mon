@@ -8,8 +8,8 @@
   left: 0;
   width: 100%;
   height: $headerHeight;
-  background: transparentize(darken($colorThemeAccent, 2), 0.085);
-  color: $colorThemePrimary;
+  background: transparentize(darken($colorThemePrimary, 5), 0.1);
+  color: $colorThemeSecondary;
   @include simpleShadowBot();
   padding: 0 $spacing;
 
@@ -22,7 +22,7 @@
   }
 
   .status {
-    color: $colorThemeSecondary;
+    color: darken($colorThemeSecondary, 5);
     text-align: center;
   }
 

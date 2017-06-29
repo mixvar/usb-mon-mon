@@ -1,4 +1,16 @@
 @import '../../../node_modules/@angular/material/_theming';
+@import './styles';
+
+@function custom-theme($primary, $accent, $foreground, $background, $is-dark, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: $is-dark,
+    foreground: $foreground,
+    background: $background,
+  );
+}
 
 /* angular material theme */
 @include mat-core();
@@ -9,3 +21,47 @@ $themeWarn: mat-palette($mat-red);
 
 $materialTheme: mat-dark-theme($themePrimary, $themeSecondary, $themeWarn);
 @include angular-material-theme($materialTheme);
+
+/* md-checkbox theme */
+$checkboxThemePrimary: mat-palette($mat-blue-grey, 600, 500, 700);
+$checkboxThemeSecondary: mat-palette($mat-grey, 900, 900, 900);
+  $md-checkbox-foreground: (
+    base:              black,
+    divider:           $black-12-opacity,
+    dividers:          $black-12-opacity,
+    disabled:          rgba(black, 0.38),
+    disabled-button:   rgba(black, 0.38),
+    disabled-text:     rgba(black, 0.38),
+    hint-text:         rgba(black, 0.38),
+    secondary-text:    rgba(black, 0.54),
+    icon:              rgba(black, 0.54),
+    icons:             rgba(black, 0.54),
+    text:              rgba(black, 0.87),
+    slider-off:        rgba(black, 0.26),
+    slider-off-active: rgba(black, 0.38),
+  );
+  $md-checkbox-background: (
+    status-bar: map_get($mat-grey, 300),
+    app-bar:    map_get($mat-grey, 100),
+    background: $colorThemePrimary, // <--- changes the tick color
+    hover:      rgba(black, 0.04),
+    card:       white,
+    dialog:     white,
+    disabled-button: $black-12-opacity,
+    raised-button: white,
+    focused-button: $black-6-opacity,
+    selected-button: map_get($mat-grey, 300),
+    selected-disabled-button: map_get($mat-grey, 400),
+    disabled-button-toggle: map_get($mat-grey, 200),
+  );
+
+$checkboxTheme: custom-theme(
+    $checkboxThemePrimary,
+    $checkboxThemeSecondary,
+    $md-checkbox-foreground,
+    $md-checkbox-background,
+    true
+);
+
+@include mat-core-theme($checkboxTheme);
+@include mat-checkbox-theme($checkboxTheme);

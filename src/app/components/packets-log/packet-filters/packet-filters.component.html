@@ -1,0 +1,114 @@
+<div id="packetFiltersComponent">
+
+  <div class="header">Filters</div>
+
+  <div class="body horAlign">
+
+    <div class="row middle-xs start-xs filter">
+      <div class="col-xs-12 label">USB bus:</div>
+      <div class="col-xs value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(1)"
+          (change)="filterService.setBusFilter(1, $event.checked)">01
+        </md-checkbox>
+      </div>
+      <div class="col-xs-2 value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(2)"
+          (change)="filterService.setBusFilter(2, $event.checked)">02
+        </md-checkbox>
+      </div>
+      <div class="col-xs-2 value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(3)"
+          (change)="filterService.setBusFilter(3, $event.checked)">03
+        </md-checkbox>
+      </div>
+      <div class="col-xs-2 value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(4)"
+          (change)="filterService.setBusFilter(4, $event.checked)">04
+        </md-checkbox>
+      </div>
+      <div class="col-xs-2 value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(5)"
+          (change)="filterService.setBusFilter(5, $event.checked)">05
+        </md-checkbox>
+      </div>
+      <div class="col-xs-2 value">
+        <md-checkbox
+          [checked]="filterService.getBusFilter(6)"
+          (change)="filterService.setBusFilter(6, $event.checked)">06
+        </md-checkbox>
+      </div>
+    </div>
+
+    <div class="row middle-xs start-xs filter">
+      <div class="col-xs-12 label">Direction:</div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getDirectionFilter(Direction.Input)"
+          (change)="filterService.setDirectionFilter(Direction.Input, $event.checked)">Input
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getDirectionFilter(Direction.Output)"
+          (change)="filterService.setDirectionFilter(Direction.Output, $event.checked)">Output
+        </md-checkbox>
+      </div>
+    </div>
+
+    <div class="row middle-xs start-xs filter">
+      <div class="col-xs-12 label">Event type:</div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getEventTypeFilter(EventType.Submission)"
+          (change)="filterService.setEventTypeFilter(EventType.Submission, $event.checked)">Submission
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getEventTypeFilter(EventType.Callback)"
+          (change)="filterService.setEventTypeFilter(EventType.Callback, $event.checked)">Callback
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getEventTypeFilter(EventType.SubmissionError)"
+          (change)="filterService.setEventTypeFilter(EventType.SubmissionError, $event.checked)">SubmissionError
+        </md-checkbox>
+      </div>
+    </div>
+
+    <div class="row middle-xs start-xs filter">
+      <div class="col-xs-12 label">URB type:</div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getUrbTypeFilter(UrbType.Control)"
+          (change)="filterService.setUrbTypeFilter(UrbType.Control, $event.checked)">Control
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getUrbTypeFilter(UrbType.Isochronous)"
+          (change)="filterService.setUrbTypeFilter(UrbType.Isochronous, $event.checked)">Isochronous
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getUrbTypeFilter(UrbType.Interrupt)"
+          (change)="filterService.setUrbTypeFilter(UrbType.Interrupt, $event.checked)">Interrupt
+        </md-checkbox>
+      </div>
+      <div class="col-xs-3 value">
+        <md-checkbox
+          [checked]="filterService.getUrbTypeFilter(UrbType.Bulk)"
+          (change)="filterService.setUrbTypeFilter(UrbType.Bulk, $event.checked)">Bulk
+        </md-checkbox>
+      </div>
+    </div>
+
+  </div>
+</div>

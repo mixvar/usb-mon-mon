@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdDialogModule } from '@angular/material';
+import { MdButtonModule, MdDialogModule, MdCheckboxModule } from '@angular/material';
 
 import { AppComponent } from './components/app.component';
 import IUsbMonMonConnector from './services/usb-mon-mon-connector/usb-mon-mon-conector.service.interface';
@@ -16,6 +16,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { PacketsLogComponent } from './components/packets-log/packets-log.component';
 import { PacketComponent } from './components/packets-log/packet/packet.component';
 import { PacketDetailsComponent } from './components/packets-log/packet-details/packet-details.component';
+import { PacketFiltersComponent } from './components/packets-log/packet-filters/packet-filters.component';
+import IPacketFilterService from './services/packet-filter/packet-filter.service.interface';
+import { PacketFilterService } from 'app/services/packet-filter/packet-filter.service';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -29,7 +32,8 @@ const socketConfig: SocketIoConfig = {
     HeaderComponent,
     PacketsLogComponent,
     PacketComponent,
-    PacketDetailsComponent
+    PacketDetailsComponent,
+    PacketFiltersComponent
   ],
   entryComponents: [
     PacketDetailsComponent
@@ -41,11 +45,13 @@ const socketConfig: SocketIoConfig = {
     SocketIoModule.forRoot(socketConfig),
     BrowserAnimationsModule,
     MdButtonModule,
-    MdDialogModule
+    MdDialogModule,
+    MdCheckboxModule
   ],
   providers: [
     { provide: IUsbMonMonConnector, useClass: UsbMonMonConnector },
     { provide: IPacketsService, useClass: PacketsService },
+    { provide: IPacketFilterService, useClass: PacketFilterService },
   ],
   bootstrap: [AppComponent]
 })
