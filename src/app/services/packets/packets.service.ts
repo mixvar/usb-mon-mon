@@ -40,7 +40,7 @@ export class PacketsService implements IPacketsService {
 
   private refilter() {
     // #oldfashionway
-    this.filteredPacketsBuffer.splice(0, this.filteredPacketsBuffer.length); // clear array
+    this.filteredPacketsBuffer = [];
     for (let i = 0; i < this.packetsBuffer.length; i++) {
       const packet: Packet = this.packetsBuffer[i];
       if (this.filterService.filter(packet)) {
