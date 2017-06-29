@@ -1,14 +1,16 @@
 //noinspection CssUnknownTarget
 @import '~app/styles/styles';
 
-#headerComponent{
+$bgcolor: transparentize(darken($colorThemePrimary, 5), 0.1);
+
+#headerComponent {
   position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
   height: $headerHeight;
-  background: transparentize(darken($colorThemePrimary, 5), 0.1);
+  background: $bgcolor;
   color: $colorThemeSecondary;
   @include simpleShadowBot();
   padding: 0 $spacing;
@@ -17,13 +19,31 @@
     height: $headerHeight;
   }
 
-  .title{
-    font-size: 38px;
+  .title {
+    font-size: 42px;
+    @include fontStyle(light);
+    color: $colorThemeSecondary;
+  }
+
+  .clearData {
+    color: $colorThemeSecondary;
+    transition: color 300ms ease;
+    &:hover {
+      color: rgba(red, 0.75);
+    }
   }
 
   .status {
-    color: darken($colorThemeSecondary, 5);
-    text-align: center;
+    color: $colorThemeSecondary;
+    font-size: $fontSizeSubHeader;
+    background: transparent;
+    transition: color 300ms ease;
+    .value {
+      @include fontStyle(bold);
+    }
+    &:hover {
+      color: lighten($colorThemeAccent, 30);
+    }
   }
 
 }

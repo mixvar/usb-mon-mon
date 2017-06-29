@@ -9,8 +9,10 @@ import IPacketFilterService from '../packet-filter/packet-filter.service.interfa
 @Injectable()
 export class PacketsService implements IPacketsService {
 
-  public packetsBuffer: Packet[] = [];
+
   public filteredPacketsBuffer: Packet[] = [];
+
+  private packetsBuffer: Packet[] = [];
   private bufferSize = 1000;
 
   constructor(private ummConnector: IUsbMonMonConnector,
@@ -21,6 +23,11 @@ export class PacketsService implements IPacketsService {
     filterService.filtersChangeEvent_.subscribe(
       () => this.refilter()
     );
+  }
+
+  public clearBuffers() {
+    this.packetsBuffer = [];
+    this.filteredPacketsBuffer = [];
   }
 
   private onNewPacket(packet: Packet) {

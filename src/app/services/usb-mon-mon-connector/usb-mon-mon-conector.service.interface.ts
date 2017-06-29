@@ -6,6 +6,7 @@ abstract class IUsbMonMonConnector {
 
   abstract getStatus_(): Observable<AppStatus>;
   abstract getPackets_(): Observable<Packet>;
+  abstract toggleActive(): void;
 }
 
 export default IUsbMonMonConnector;

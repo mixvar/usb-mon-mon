@@ -4,29 +4,37 @@
 #packetFiltersComponent {
 
   background: darken($colorThemeAccent, 5);
-  padding: 2*$spacing;
   margin: 2*$spacing -2*$spacing;
-  border-top: 2px solid lighten($colorThemeAccent, 5);
-  border-bottom: 2px solid lighten($colorThemeAccent, 5);
+  border-top: 3px solid lighten($colorThemeAccent, 5);
+  border-bottom: 3px solid lighten($colorThemeAccent, 5);
   color: lighten($colorThemePrimary, 5);
 
   .header {
     text-align: center;
-    font-size: $fontSizeHeader;
+    font-size: $fontSizeSubHeader;
+    margin: $spacing;
     padding: 0;
+    @include fontStyle(light);
   }
 
   .filter {
-    margin-top: 2*$spacing;
-  }
-
-  .label {
-    color: $colorThemeSecondary;
-    padding-bottom: $spacing;
-    font-size: 19px;
-  }
-
-  .value {
+    padding: 2*$spacing $spacing;
+    background: transparent;
+    transition: background 300ms ease-in-out;
+    .label {
+      color: $colorThemeSecondary;
+      padding-bottom: $spacing;
+      font-size: 19px;
+      transition: color 300ms ease-in-out;
+    }
+    .value {
+    }
+    &:hover {
+      background: darken($colorThemeAccent, 15);
+      .label {
+        color: lighten($colorThemeAccent, 15);
+      }
+    }
   }
 
 }

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdDialogModule, MdCheckboxModule } from '@angular/material';
+import { MdButtonModule, MdDialogModule, MdCheckboxModule, MdSlideToggleModule } from '@angular/material';
 
 import { AppComponent } from './components/app.component';
 import IUsbMonMonConnector from './services/usb-mon-mon-connector/usb-mon-mon-conector.service.interface';
@@ -46,7 +46,8 @@ const socketConfig: SocketIoConfig = {
     BrowserAnimationsModule,
     MdButtonModule,
     MdDialogModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MdSlideToggleModule,
   ],
   providers: [
     { provide: IUsbMonMonConnector, useClass: UsbMonMonConnector },
