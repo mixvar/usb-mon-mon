@@ -7,8 +7,8 @@
     "build": "ng build",
     "build-prod": "ng build -prod",
     "start-front": "ng serve",
-    "start-back": "cd src/server && SET USBMON_OUT=./../../../test.out && SET STANDALONE_BACKEND=true && nodemon server.js",
-    "start-all": "cd dist/server && SET USBMON_OUT=./../../../test.out && node server.js",
+    "start-back": "USBMON_OUT=./../../../test.out STANDALONE_BACKEND=true nodemon src/server/server.js",
+    "start-all": "USBMON_OUT=./../../../test.out node dist/server/server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
