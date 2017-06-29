@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/from';
 import { Socket } from 'ng-socket-io';
 import { plainToClass } from 'class-transformer';
 
@@ -14,7 +16,7 @@ import { AppStatus } from 'app/model/app-status';
 @Injectable()
 export class UsbMonMonConnector implements IUsbMonMonConnector {
 
-  private packets_: Subject<Packet> = new Subject();
+  private packets_: Subject<Packet[]> = new Subject();
   private status_: Subject<AppStatus> = new ReplaySubject(1);
 
   constructor(private socket: Socket) {
@@ -25,6 +27,7 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
 
   public getPackets_(): Observable<Packet> {
     return this.packets_
+      .flatMap((packets) => (Observable.from(packets)))
       .map((packet) => plainToClass(Packet, packet));
   }
 
@@ -39,9 +42,9 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
   }
 
   private receivePackets() {
-    this.socket.on('packet', (packet: Packet) => {
-      console.debug('received packet', packet);
-      this.packets_.next(packet);
+    this.socket.on('packets', (packets: Packet[]) => {
+      console.debug('received packets', packets);
+      this.packets_.next(packets);
     });
   }
 

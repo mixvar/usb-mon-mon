@@ -17,7 +17,7 @@ if (process.env.STANDALONE_BACKEND) {
   serveContent = (response) => response.send('<h1>usb-mon-mon back running!</h1>');
 } else {
   app.use(express.static(path.join(__dirname, '../')));
-  serveContent = (response) => response.sendFile(__dirname + "../index.html");
+  serveContent = (response) => response.sendFile(__dirname + '../index.html');
 }
 
 app.get('/', (request, response) => {
@@ -46,15 +46,18 @@ if (!ubmonOut) {
   usbmonReader.watch(ubmonOut);
 }
 
-usbmonReader.getPackets().subscribe(
-  (packet) => {
-    io.emit('packet', packet)
-  },
-  (error) => {
-    console.error('error while reading usbmon!', error);
-    const errorStatus = (error.code === 'ENOENT')
-      ? model.ServerStatus.ERROR_USBMON_OUT_NOT_FOUND
-      : model.ServerStatus.ERROR_IO;
-    serverStatus_.next(errorStatus);
-  }
-);
+usbmonReader.getPackets()
+  .bufferTime(500)
+  .filter((packets) => packets.length > 0)
+  .subscribe(
+    (packets) => {
+      io.emit('packets', packets)
+    },
+    (error) => {
+      console.error('error while reading usbmon!', error);
+      const errorStatus = (error.code === 'ENOENT')
+        ? model.ServerStatus.ERROR_USBMON_OUT_NOT_FOUND
+        : model.ServerStatus.ERROR_IO;
+      serverStatus_.next(errorStatus);
+    }
+  );

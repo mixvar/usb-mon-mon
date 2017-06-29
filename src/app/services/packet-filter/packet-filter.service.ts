@@ -79,7 +79,6 @@ export class PacketFilterService implements IPacketFilterService {
 
   public filter(packet: Packet): boolean {
     const { parsedData } = packet;
-    console.warn('filtering packets!');
 
     return (
       this.busFilters.get(parsedData.busNumber) &&
