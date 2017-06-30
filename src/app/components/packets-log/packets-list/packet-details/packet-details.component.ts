@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
-import { Packet } from '../../../model/packet';
+import { Packet } from '../../../../model/packet';
 
 @Component({
   selector: 'umm-packet-details',

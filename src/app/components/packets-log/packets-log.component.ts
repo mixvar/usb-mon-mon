@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
 import IPacketsService from './../../services/packets/packets.service.interface';
-import { PacketDetailsComponent } from './packet-details/packet-details.component';
+import { PacketDetailsComponent } from './packets-list/packet-details/packet-details.component';
 import { Packet } from '../../model/packet';
+import IChartsService from '../../services/charts/charts.service.interface';
 
 @Component({
   selector: 'umm-packets-log',
@@ -13,16 +14,9 @@ import { Packet } from '../../model/packet';
 export class PacketsLogComponent implements OnInit {
 
   constructor(public packetsService: IPacketsService,
-              public dialog: MdDialog) { }
+              public chartService: IChartsService) { }
 
   ngOnInit() {
-  }
-
-  showPacketDetails(packet: Packet) {
-    this.dialog.open(PacketDetailsComponent, {
-      data: packet,
-      panelClass: 'packetDetailsDialog',
-    });
   }
 
 }

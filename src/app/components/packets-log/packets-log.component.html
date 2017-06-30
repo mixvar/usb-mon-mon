@@ -1,7 +1,12 @@
 <div id="packetsLogComponent">
   <div class="header horCenter">Packets Log</div>
 
-  <umm-statistics></umm-statistics> <!-- TODO: move to another page -->
+  <!-- TODO: move to another page -->
+  <umm-statistics [inputDataTicks]="chartService.getInputDataTicks()"
+                  [outputDataTicks]="chartService.getOutputDataTicks()"
+                  [inputPacketsTicks]="chartService.getInputPacketsTicks()"
+                  [outputPacketsTicks]="chartService.getOutputPacketsTicks()">
+  </umm-statistics>
 
   <div class="subHeader horCenter">Filters</div>
   <umm-packet-filters></umm-packet-filters>
@@ -27,10 +32,9 @@
     </div>
   </div>
 
-  <div id="packetsContainer" class="horAlign">
-    <div class="packet" *ngFor="let packet of packetsService.filteredPacketsBuffer">
-      <umm-packet [packet]="packet" (click)="showPacketDetails(packet)"></umm-packet>
-    </div>
-  </div>
+
+  <umm-packets-list
+    [packets]="packetsService.filteredPacketsBuffer">
+  </umm-packets-list>
 
 </div>

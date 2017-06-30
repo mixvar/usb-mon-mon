@@ -1,0 +1,7 @@
+<div id="packetsListComponent" class="horAlign">
+
+  <div class="packet" *ngFor="let packet of packets">
+    <umm-packet [packet]="packet" (click)="showPacketDetails(packet)"></umm-packet>
+  </div>
+
+</div>

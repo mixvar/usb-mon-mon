@@ -33,10 +33,11 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
     this.receiveTicks();
   }
 
-  public getPackets_(): Observable<Packet> {
+  public getBufferedPackets_(): Observable<Packet[]> {
     return this.packets_
-      .flatMap((packets) => (Observable.from(packets)))
-      .map((packet) => plainToClass(Packet, packet));
+      .map((packets) => packets.map(
+        (packet) => plainToClass(Packet, packet))
+      );
   }
 
   getTicks_(): Observable<PacketsTick> {

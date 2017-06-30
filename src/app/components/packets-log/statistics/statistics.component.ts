@@ -1,13 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import IChartsService from '../../../services/charts/charts.service.interface';
 
 
 @Component({
   selector: 'umm-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrls: ['./statistics.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsComponent implements OnInit {
+
+  @Input()
+  public inputPacketsTicks: number[];
+
+  @Input()
+  public outputPacketsTicks: number[];
+
+  @Input()
+  public inputDataTicks: number[];
+
+  @Input()
+  public outputDataTicks: number[];
+
 
   private chartOptions = {
     responsive: true,
@@ -57,26 +71,26 @@ export class StatisticsComponent implements OnInit {
 
   getTicksChartDataset(): Array<any> {
     return [
-      { data: this.chartService.getInputPacketsTicks(), label: 'Input packets', borderWidth: 0.9 },
-      { data: this.chartService.getOutputPacketsTicks(), label: 'Output packets', borderWidth: 0.9 },
+      { data: this.inputPacketsTicks, label: 'Input packets', borderWidth: 0.9 },
+      { data: this.outputPacketsTicks, label: 'Output packets', borderWidth: 0.9 },
     ];
   }
 
   getDataChartDataset(): Array<any> {
     return [
-      { data: this.chartService.getInputDataTicks(), label: 'Read', borderWidth: 0.9 },
-      { data: this.chartService.getOutputDataTicks(), label: 'Write', borderWidth: 0.9 },
+      { data: this.inputDataTicks, label: 'Read', borderWidth: 0.9 },
+      { data: this.outputDataTicks, label: 'Write', borderWidth: 0.9 },
     ];
   }
 
   getTimeLabels(): string[] {
     // return this.chartService.getChartTimeScale();
     let labels = Array(this.chartService.ticsCount);
-    labels.fill('noop');
+    labels.fill('');
     labels = labels.map((label, i) => {
       return (this.chartService.timeScale - i * this.chartService.timeSlice) / 1000 + 's';
     });
-    labels[labels.length - 1] = 'now'
+    labels[labels.length - 1] = 'now';
     return labels;
   }
 

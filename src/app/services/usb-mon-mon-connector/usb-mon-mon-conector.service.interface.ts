@@ -7,7 +7,7 @@ abstract class IUsbMonMonConnector {
 
   abstract getStatus_(): Observable<AppStatus>;
 
-  abstract getPackets_(): Observable<Packet>;
+  abstract getBufferedPackets_(): Observable<Packet[]>;
 
   abstract getTicks_(): Observable<PacketsTick>;
 

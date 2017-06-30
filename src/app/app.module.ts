@@ -17,8 +17,8 @@ import { PacketsService } from './services/packets/packets.service';
 import { MomentPipe } from './pipes/moment.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { PacketsLogComponent } from './components/packets-log/packets-log.component';
-import { PacketComponent } from './components/packets-log/packet/packet.component';
-import { PacketDetailsComponent } from './components/packets-log/packet-details/packet-details.component';
+import { PacketComponent } from './components/packets-log/packets-list/packet/packet.component';
+import { PacketDetailsComponent } from './components/packets-log/packets-list/packet-details/packet-details.component';
 import { PacketFiltersComponent } from './components/packets-log/packet-filters/packet-filters.component';
 import IPacketFilterService from './services/packet-filter/packet-filter.service.interface';
 import { PacketFilterService } from 'app/services/packet-filter/packet-filter.service';
@@ -26,6 +26,7 @@ import { StatisticsComponent } from './components/packets-log/statistics/statist
 import { AppRoutingModule } from 'app/app-routing.module';
 import IChartsService from './services/charts/charts.service.interface';
 import { ChartsService } from 'app/services/charts/charts.service';
+import { PacketsListComponent } from './components/packets-log/packets-list/packets-list.component';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -41,7 +42,8 @@ const socketConfig: SocketIoConfig = {
     PacketComponent,
     PacketDetailsComponent,
     PacketFiltersComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    PacketsListComponent
   ],
   entryComponents: [
     PacketDetailsComponent

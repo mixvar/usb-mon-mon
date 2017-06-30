@@ -17,8 +17,8 @@ export class PacketsService implements IPacketsService {
 
   constructor(private ummConnector: IUsbMonMonConnector,
               private filterService: IPacketFilterService) {
-    ummConnector.getPackets_().subscribe(
-      (packet) => this.onNewPacket(packet)
+    ummConnector.getBufferedPackets_().subscribe(
+      (packets) => this.onNewPackets(packets)
     );
     filterService.filtersChangeEvent_.subscribe(
       () => this.refilter()
@@ -30,12 +30,17 @@ export class PacketsService implements IPacketsService {
     this.filteredPacketsBuffer = [];
   }
 
-  private onNewPacket(packet: Packet) {
-    this.addPacketToBuffer(packet, this.packetsBuffer);
+  private onNewPackets(packets: Packet[]) {
+    for (let i = 0; i < packets.length; i++) {
+      const packet: Packet = packets[i];
 
-    if (this.filterService.filter(packet)) {
-      this.addPacketToBuffer(packet, this.filteredPacketsBuffer);
+      this.addPacketToBuffer(packet, this.packetsBuffer);
+      if (this.filterService.filter(packet)) {
+        this.addPacketToBuffer(packet, this.filteredPacketsBuffer);
+      }
     }
+
+    this.filteredPacketsBuffer = this.filteredPacketsBuffer.slice(0);
   }
 
   private addPacketToBuffer(packet: Packet, buffer: Packet[]) {
