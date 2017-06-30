@@ -11,23 +11,6 @@ import { EnumAware } from '../../../decorators/enum-aware.decorator';
 @EnumAware
 export class PacketFiltersComponent implements OnInit {
 
-  // // needed to use enums from html..
-  // private Direction = {
-  //   Input: Direction.Input,
-  //   Output: Direction.Output,
-  // };
-  // private EventType = {
-  //   Submission: EventType.,
-  //   Callback: EventType.Callback,
-  //   SubmissionError: EventType.SubmissionError,
-  // };
-  // private UrbType = {
-  //   Control: UrbType.Control,
-  //   Isochronous: UrbType.Isochronous,
-  //   Interrupt: UrbType.Interrupt,
-  //   Bulk: UrbType.Bulk
-  // }
-
   constructor(public filterService: IPacketFilterService) {}
 
   ngOnInit() {

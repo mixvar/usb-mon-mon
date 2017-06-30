@@ -6,6 +6,9 @@ const server = http.createServer(app);
 const rx = require('rxjs/Rx');
 const usbmonReader = require('./usbmon-reader');
 const model = require('./model-enums');
+const usbmonParser = require('./usbmon-parser');
+
+const CHARTS_TIME_SLICE = 1000;
 
 let serverStatus_ = new rx.ReplaySubject(1);
 serverStatus_.next(model.ServerStatus.OK);
@@ -59,5 +62,14 @@ usbmonReader.getPackets()
         ? model.ServerStatus.ERROR_USBMON_OUT_NOT_FOUND
         : model.ServerStatus.ERROR_IO;
       serverStatus_.next(errorStatus);
+    }
+  );
+
+usbmonReader.getPackets()
+  .bufferTime(CHARTS_TIME_SLICE)
+  .map((packets) => usbmonParser.reduceToTick(packets))
+  .subscribe(
+    (tick) => {
+      io.emit('tick', tick)
     }
   );

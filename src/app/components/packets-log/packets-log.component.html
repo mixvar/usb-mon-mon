@@ -1,9 +1,9 @@
 <div id="packetsLogComponent">
-  <umm-header></umm-header>
-
-
   <div class="header horCenter">Packets Log</div>
 
+  <umm-statistics></umm-statistics> <!-- TODO: move to another page -->
+
+  <div class="subHeader horCenter">Filters</div>
   <umm-packet-filters></umm-packet-filters>
 
   <div *ngIf="packetsService.filteredPacketsBuffer.length" id="labelsContainer" class="row horAlign">

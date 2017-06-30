@@ -18,12 +18,16 @@
   }
 
   .filter {
-    padding: 2*$spacing $spacing;
+    padding: 0 $spacing;
     background: transparent;
     transition: background 300ms ease-in-out;
+    .row {
+      padding: $spacing 0;
+      border-bottom: 1px solid darken($colorThemeAccent, 15);
+    }
     .label {
       color: $colorThemeSecondary;
-      padding-bottom: $spacing;
+      padding-bottom: $spacing/2;
       font-size: 19px;
       transition: color 300ms ease-in-out;
     }
@@ -33,6 +37,11 @@
       background: darken($colorThemeAccent, 15);
       .label {
         color: lighten($colorThemeAccent, 15);
+      }
+    }
+    &:last-child {
+      .row {
+        border: none;
       }
     }
   }

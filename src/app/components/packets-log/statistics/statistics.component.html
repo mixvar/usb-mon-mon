@@ -1,0 +1,31 @@
+<div id="statisticsComponent">
+  <div class="row middle-xs center-xs horAlign">
+
+    <div class="col-xs-12">
+      <div class="chartContainer">
+        <div class="subHeader">Packets chart</div>
+        <canvas baseChart width="600" height="250"
+                [datasets]="getTicksChartDataset()"
+                [labels]="getTimeLabels()"
+                [options]="getChartOptions('count')"
+                [colors]="chartColors"
+                [legend]="true"
+                chartType="line"></canvas>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="chartContainer">
+        <div class="subHeader">Data chart</div>
+        <canvas baseChart width="600" height="250"
+                [datasets]="getDataChartDataset()"
+                [labels]="getTimeLabels()"
+                [options]="getChartOptions('kB')"
+                [colors]="chartColors"
+                [legend]="true"
+                chartType="line"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>

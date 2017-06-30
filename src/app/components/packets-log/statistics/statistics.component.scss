@@ -1,0 +1,16 @@
+//noinspection CssUnknownTarget
+@import '~app/styles/styles';
+
+#statisticsComponent {
+
+  margin: 3*$spacing auto;
+
+  .chartContainer {
+    margin: $spacing auto;
+    max-width: 800px;
+    padding: $spacing;
+    background-color: lighten($colorThemeSecondary, 5);
+  }
+
+}
+

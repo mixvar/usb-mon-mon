@@ -5,13 +5,15 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/bufferTime';
 import 'rxjs/add/observable/from';
 import { Socket } from 'ng-socket-io';
 import { plainToClass } from 'class-transformer';
 
 import IUsbMonMonConnector from './usb-mon-mon-conector.service.interface';
-import { Packet } from '../../model/packet';
+import { EventType, Packet, Direction } from '../../model/packet';
 import { AppStatus } from 'app/model/app-status';
+import { PacketsTick } from '../../model/packets-tick';
 
 
 @Injectable()
@@ -19,6 +21,7 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
 
   private isActive = true;
   private packets_: Subject<Packet[]> = new Subject();
+  private ticks_: Subject<PacketsTick> = new Subject();
 
   private lastServerStatus: AppStatus;
   private appStatus_: Subject<AppStatus> = new ReplaySubject(1);
@@ -27,13 +30,17 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
     this.appStatus_.next(AppStatus.CONNECTING);
     this.receiveStatus();
     this.receivePackets();
+    this.receiveTicks();
   }
 
   public getPackets_(): Observable<Packet> {
     return this.packets_
-      .filter(() => this.isActive)
       .flatMap((packets) => (Observable.from(packets)))
       .map((packet) => plainToClass(Packet, packet));
+  }
+
+  getTicks_(): Observable<PacketsTick> {
+    return this.ticks_;
   }
 
   public getStatus_(): Observable<AppStatus> {
@@ -68,8 +75,20 @@ export class UsbMonMonConnector implements IUsbMonMonConnector {
 
   private receivePackets() {
     this.socket.on('packets', (packets: Packet[]) => {
-      console.debug('received packets', packets);
-      this.packets_.next(packets);
+      if (this.isActive)
+        this.packets_.next(packets);
+    });
+  }
+
+  private receiveTicks() {
+    this.socket.on('tick', (tick: PacketsTick) => {
+      if (this.isActive) {
+        this.ticks_.next(tick);
+      } else {
+        const emptyTick = PacketsTick.empty();
+        emptyTick.timestamp = tick.timestamp;
+        this.ticks_.next(emptyTick);
+      }
     });
   }
 

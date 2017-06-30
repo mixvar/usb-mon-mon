@@ -18,9 +18,46 @@ module.exports = {
     }
 
     return packet;
+  },
+
+  reduceToTick: (packets) => {
+    return packets.reduce(
+      (tick, packet) => {
+        if (model.Direction.Input === packet.parsedData.direction) {
+          tick.inputPacketsCount++;
+          if (model.EventType.Callback === packet.parsedData.eventType) {
+            tick.inputDataSize += packet.parsedData.dataBytesCount;
+          }
+        } else {
+          tick.outputPacketsCount++;
+          if (model.EventType.Callback === packet.parsedData.eventType) {
+            tick.outputDataSize += packet.parsedData.dataBytesCount;
+          }
+        }
+
+        return tick;
+      },
+      {
+        timestamp: getTickTimestamp(packets),
+        inputPacketsCount: 0,
+        outputPacketsCount: 0,
+        inputDataSize: 0,
+        outputDataSize: 0
+      }
+    );
   }
 
 };
+
+function getTickTimestamp(packets) {
+  if (packets.length === 0) {
+    return Math.floor(Date.now());
+  } else if (packets.length === 1) {
+    return packets[0].date;
+  } else {
+    return (packets[0].date + packets[packets.length - 1].date) / 2
+  }
+}
 
 function parseContent(rawRecord) {
   validateRecord(rawRecord);

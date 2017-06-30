@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.ummConnector.getStatus_().subscribe(
       (status: AppStatus) => {
-        console.warn(`server status: ${AppStatus[status]}`);
         this.appStatus = AppStatus[status];
         switch (status) {
           case AppStatus.LISTENING:

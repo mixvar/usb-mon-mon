@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdDialogModule, MdCheckboxModule, MdSlideToggleModule } from '@angular/material';
+import {
+  MdButtonModule, MdDialogModule, MdCheckboxModule, MdSlideToggleModule
+} from '@angular/material';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { AppComponent } from './components/app.component';
 import IUsbMonMonConnector from './services/usb-mon-mon-connector/usb-mon-mon-conector.service.interface';
@@ -19,6 +22,10 @@ import { PacketDetailsComponent } from './components/packets-log/packet-details/
 import { PacketFiltersComponent } from './components/packets-log/packet-filters/packet-filters.component';
 import IPacketFilterService from './services/packet-filter/packet-filter.service.interface';
 import { PacketFilterService } from 'app/services/packet-filter/packet-filter.service';
+import { StatisticsComponent } from './components/packets-log/statistics/statistics.component';
+import { AppRoutingModule } from 'app/app-routing.module';
+import IChartsService from './services/charts/charts.service.interface';
+import { ChartsService } from 'app/services/charts/charts.service';
 
 const socketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',
@@ -33,7 +40,8 @@ const socketConfig: SocketIoConfig = {
     PacketsLogComponent,
     PacketComponent,
     PacketDetailsComponent,
-    PacketFiltersComponent
+    PacketFiltersComponent,
+    StatisticsComponent
   ],
   entryComponents: [
     PacketDetailsComponent
@@ -42,17 +50,20 @@ const socketConfig: SocketIoConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    AppRoutingModule,
     SocketIoModule.forRoot(socketConfig),
     BrowserAnimationsModule,
     MdButtonModule,
     MdDialogModule,
     MdCheckboxModule,
     MdSlideToggleModule,
+    ChartsModule
   ],
   providers: [
     { provide: IUsbMonMonConnector, useClass: UsbMonMonConnector },
     { provide: IPacketsService, useClass: PacketsService },
     { provide: IPacketFilterService, useClass: PacketFilterService },
+    { provide: IChartsService, useClass: ChartsService },
   ],
   bootstrap: [AppComponent]
 })
